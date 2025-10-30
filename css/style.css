@@ -1,0 +1,371 @@
+/* css/style.css (Dark Mode + Roxo Elétrico + Layout 2 Colunas) */
+
+/* 1. Configurações Globais (Paleta Roxa) */
+:root {
+    color-scheme: dark;
+    --main-purple: #9d4edd;      /* Roxo principal */
+    --main-purple-hover: #b56fff; /* Roxo mais claro para hover */
+    --main-purple-glow: rgba(157, 78, 221, 0.6); /* O "glow" */
+}
+
+/* Encontre esta regra (por volta da linha 14) */
+body {
+    font-family: "Momo Trust Display", sans-serif;
+    background-color: #121212; /* Mantenha esta cor! */
+    color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    
+    /* --- ADICIONE ESTAS DUAS LINHAS --- */
+    position: relative; /* Necessário para o z-index funcionar */
+    isolation: isolate; /* Cria um "limite" para o z-index */
+}
+
+body::before {
+    content: ""; /* Obrigatório para pseudo-elementos */
+    position: fixed; /* Fica fixo na tela, mesmo com scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Caminho para sua imagem (ajuste se a pasta não for 'img') */
+    background-image: url('../img/roxo.jpg');
+    
+    /* Faz a imagem cobrir a tela toda */
+    background-size: cover;
+    background-position: center center;
+    
+    /* --- Efeitos que você pediu --- */
+    
+    /* 1. Desfoque (ajuste 8px para mais/menos) */
+    filter: blur(8px);
+    
+    /* 2. Opacidade (ajuste 0.25 para mais/menos) */
+    opacity: 0.60; /* 25% de opacidade */
+
+    /* --- Mágica do Empilhamento --- */
+    /* Coloca esta camada de imagem ATRÁS de todo o seu conteúdo */
+    z-index: -1;
+}
+
+/* REGRA SUBSTITUÍDA (Container Principal) */
+.container {
+    /* EFEITO VIDRO FOSCO: */
+    background-color: rgba(30, 30, 30, 0.75); /* Fundo preto 75% opaco */
+    -webkit-backdrop-filter: blur(10px); /* Para Safari */
+    backdrop-filter: blur(10px); /* O "desfoque" do fundo */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda branca sutil */
+
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.container:not(.dashboard):hover {
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.2);
+    border-color: var(--main-purple);
+}
+
+
+h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 0;
+}
+
+/* 2. Formulários (Paleta Roxa) */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #b0b0b0;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    /* FONTE REVERTIDA: Arial (padrão) */
+    font-family: "Momo Trust Display", sans-serif;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: var(--main-purple); /* Borda Roxa */
+    box-shadow: 0 0 8px rgba(157, 78, 221, 0.5); /* Glow Roxo no focus */
+}
+
+form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* 3. Botões com Efeito "Glow" Roxo */
+form button[type="submit"],
+.btn-logout,
+.btn-cancelar,
+.btn-acao {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--main-purple); /* Cor Roxa */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    /* FONTE REVERTIDA: Arial (padrão) */
+    font-family: "Momo Trust Display", sans-serif;
+}
+
+.btn-acao {
+    width: auto;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+/* Efeito Glow Roxo no Hover/Focus */
+form button[type="submit"]:hover,
+form button[type="submit"]:focus,
+.btn-acao:hover,
+.btn-acao:focus {
+    background-color: var(--main-purple-hover); /* Roxo claro */
+    transform: scale(1.02);
+    box-shadow: 0 0 15px var(--main-purple-glow); /* Glow Roxo */
+}
+
+/* (Botões de Sair, Cancelar, Editar, Excluir - mantidos) */
+.btn-logout {
+    width: auto; padding: 8px 12px; font-size: 14px; background-color: #dc3545;
+}
+.btn-logout:hover, .btn-logout:focus {
+    background-color: #e74c3c; transform: scale(1.02); box-shadow: 0 0 15px rgba(220, 53, 69, 0.6);
+}
+.btn-cancelar {
+    background-color: #6c757d; margin-top: 10px;
+}
+.btn-cancelar:hover, .btn-cancelar:focus {
+    background-color: #86939e; transform: scale(1.02); box-shadow: 0 0 15px rgba(108, 117, 125, 0.6);
+}
+.btn-acao.btn-editar {
+    background-color: #ffc107; color: #333;
+}
+.btn-acao.btn-editar:hover, .btn-acao.btn-editar:focus {
+    background-color: #ffd966; box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+}
+.btn-acao.btn-excluir {
+    background-color: #dc3545; color: white;
+}
+.btn-acao.btn-excluir:hover, .btn-acao.btn-excluir:focus {
+    background-color: #e74c3c; box-shadow: 0 0 15px rgba(220, 53, 69, 0.6);
+}
+
+
+/* 4. Mensagens de Feedback (Cores mantidas) */
+.erro {
+    background-color: #5e1c24; color: #f8d7da; padding: 10px; border: 1px solid #f5c6cb;
+    border-radius: 4px; margin-bottom: 15px; text-align: center;
+}
+.sucesso {
+    background-color: #155724; color: #d4edda; padding: 10px; border: 1px solid #c3e6cb;
+    border-radius: 4px; margin-bottom: 15px; text-align: center;
+}
+
+/* ====================================================
+== WIREFRAME REVERTIDO: Layout de 2 Colunas ==
+====================================================
+*/
+.container.dashboard {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 coluna (mobile) */
+    grid-template-areas: 
+        "header"
+        "form"
+        "tasks";
+    gap: 25px;
+    max-width: 800px;
+}
+
+.container.dashboard header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+/* REGRA SUBSTITUÍDA (Formulário do Dashboard) */
+.form-container { 
+    grid-area: form; 
+    
+    /* EFEITO VIDRO FOSCO: */
+    background-color: rgba(42, 42, 42, 0.75); /* Fundo 75% opaco (um pouco mais claro) */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.form-container:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+/* REGRA SUBSTITUÍDA (Tarefas do Dashboard) */
+.tarefas-container { 
+    grid-area: tasks; 
+    
+    /* EFEITO VIDRO FOSCO: */
+    background-color: rgba(42, 42, 42, 0.75); /* Fundo 75% opaco (um pouco mais claro) */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tarefas-container:hover {
+    border-color: var(--main-purple);
+    box-shadow: 0 0 15px var(--main-purple-glow); /* Glow Roxo sutil */
+}
+
+/* Layout de 2 colunas para telas maiores (Desktop) */
+@media (min-width: 900px) {
+    .container.dashboard {
+        /* 2 colunas */
+        grid-template-columns: 350px 1fr; 
+        grid-template-areas: 
+            "header header"
+            "form   tasks";
+        max-width: 1200px;
+    }
+
+    .form-container {
+        /* Formulário fica "preso" no topo */
+        position: sticky;
+        top: 20px; 
+    }
+}
+
+
+.dashboard header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* 6. Lista de Tarefas (Dark Mode) */
+.tarefas-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ====================================================
+== CSS REVERTIDO: Estilo de lista (<li>) ==
+====================================================
+*/
+/* REGRA SUBSTITUÍDA (Card de Tarefa Individual) */
+.tarefa {
+    /* EFEITO VIDRO FOSCO (mais sutil) */
+    background-color: rgba(30, 30, 30, 0.8); /* Fundo 80% opaco (para "flutuar") */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* REGRA SUBSTITUÍDA (Hover do Card) */
+.tarefa:hover {
+    background-color: rgba(50, 50, 50, 0.85); /* Fica um pouco mais claro no hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.tarefa .info h3 {
+    margin: 0 0 5px 0;
+    color: #f5f5f5;
+}
+
+.tarefa .info p {
+    margin: 0;
+    color: #a0a0a0;
+    font-size: 14px;
+}
+
+.tarefa .info .status {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+/* Cores de Status (Paleta Roxa) */
+.tarefa.status-pendente .status { color: #ffc107; }
+.tarefa.status-em-andamento .status { color: var(--main-purple); }
+.tarefa.status-concluida .status { color: #2ecc71; }
+
+.tarefa.status-concluida .info h3 { 
+    text-decoration: line-through; 
+    color: #888;
+}
+
+.tarefa .acoes {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0; 
+}
+
+/* 9. Correção Botões Edição (da sua última pergunta) */
+.form-botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+.form-botoes button[type="submit"],
+.form-botoes .btn-cancelar {
+    width: 100%;
+    margin-top: 0;
+}
+

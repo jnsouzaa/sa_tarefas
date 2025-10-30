@@ -1,21 +1,17 @@
 <?php
-// Define as informações de conexão com o banco de dados
+// config/db.php
+
 $host = 'localhost';
-$db_name = 'sa_tarefas'; // Verifique se o nome do seu banco é este
-$username = 'root';
-$password = '';      // Senha do seu MySQL (geralmente vazia no Laragon/XAMPP)
+$db_name = 'sa_tarefas'; // Nome do seu banco
+$username = 'root'; 
+$password = ''; // Sua senha (se houver)
 
 try {
-    // Cria a conexão usando PDO (a forma segura)
-    $conn = new PDO("mysql:host={$host};dbname={$db_name};charset=utf8", $username, $password);
-    
-    // Configura o PDO para lançar exceções em caso de erro
+    $dsn = "mysql:host=$host;dbname=$db_name;charset=utf8";
+    $conn = new PDO($dsn, $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Configura para que os resultados venham como arrays associativos por padrão
-    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-} catch(PDOException $e) {
-    // Se a conexão falhar, interrompe tudo e mostra o erro.
-    die("Erro na conexão com o banco de dados: " . $e->getMessage());
+} catch (PDOException $e) {
+    die("Erro ao conectar ao banco de dados: " . $e->getMessage());
 }
 ?>
