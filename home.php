@@ -34,6 +34,10 @@ try {
     <link rel="shortcut icon" href="favicons/icon.ico" type="image/x-icon">
 </head>
 <body>
+        <video id="video-fundo" autoplay muted loop playsinline>
+        <source src="videos/fundo.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos de fundo.
+    </video>
     <div class="container dashboard">
         <header>
             <h1>Olá, <?php echo htmlspecialchars($user_name); ?>!</h1>
@@ -54,7 +58,7 @@ try {
         <div class="tarefas-container">
             <h2>Suas Tarefas</h2>
             <?php if (empty($tarefas)): ?>
-                <p>Você ainda não tem nenhuma tarefa. Adicione uma acima!</p>
+                <p>Você ainda não tem nenhuma tarefa. </p> <p> Adicione uma no botão "Adicionar Tarefa" na aba ao lado.</p>
             <?php else: ?>
                 <ul>
                     <?php foreach ($tarefas as $tarefa): ?>

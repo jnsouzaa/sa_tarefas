@@ -40,6 +40,10 @@ try {
     <link rel="shortcut icon" href="favicons/icon.ico" type="image/x-icon">
 </head>
 <body>
+        <video id="video-fundo" autoplay muted loop playsinline>
+        <source src="videos/fundo.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos de fundo.
+    </video>
     <div class="container">
         <form action="tarefas/atualizar_tarefa.php" method="POST">
             <h2>Editar Tarefa</h2>
